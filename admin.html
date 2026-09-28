@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Login — Haitham</title>
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            background: #071A2B;
+            color: #F7F5EF;
+        }
+
+        .login-box {
+            width: min(90%, 400px);
+            padding: 40px;
+            background: #102D46;
+            border-radius: 16px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            margin: 8px 0 15px;
+            box-sizing: border-box;
+            border-radius: 8px;
+            border: 1px solid #6FA7A5;
+            background: #071A2B;
+            color: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: 0;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #C6A66B;
+            color: #071A2B;
+            font-weight: bold;
+        }
+
+        #message {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-box">
+        <h1>Owner Login</h1>
+        <p>Private area of Haitham's portfolio.</p>
+
+        <form id="loginForm">
+            <label>Email</label>
+            <input
+                type="email"
+                id="email"
+                required
+            >
+
+            <label>Password</label>
+            <input
+                type="password"
+                id="password"
+                required
+            >
+
+            <button type="submit">Log in</button>
+        </form>
+
+        <div id="message"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script>
+    <script src="admin.js"></script>
+
+</body>
+</html>

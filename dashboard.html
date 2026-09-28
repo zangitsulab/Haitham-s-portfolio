@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard — Haitham</title>
+
+
+    <style>
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family: Arial, sans-serif;
+
+            background: #071A2B;
+
+            color: #F7F5EF;
+        }
+
+
+        .dashboard {
+
+            width: min(90%, 900px);
+
+            margin: 60px auto;
+        }
+
+
+        .top {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+
+        button {
+
+            padding: 10px 18px;
+
+            border: 0;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            background: #C6A66B;
+
+            color: #071A2B;
+
+            font-weight: bold;
+        }
+
+
+        .card {
+
+            margin-top: 30px;
+
+            padding: 25px;
+
+            background: #102D46;
+
+            border-radius: 16px;
+        }
+
+
+        form {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+        }
+
+
+        input,
+        textarea {
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            border: 1px solid #6FA7A5;
+
+            background: #071A2B;
+
+            color: white;
+
+            font-family: inherit;
+
+            box-sizing: border-box;
+
+            width: 100%;
+        }
+
+
+        input[type="checkbox"] {
+
+            width: auto;
+        }
+
+
+        input[type="file"] {
+
+            padding: 10px;
+
+            cursor: pointer;
+        }
+
+
+        textarea {
+
+            resize: vertical;
+        }
+
+
+        label {
+
+            margin-top: 8px;
+        }
+
+
+        small.muted {
+
+            color: #AAB8C2;
+
+            display: block;
+
+            margin-top: -4px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<main class="dashboard">
+
+
+    <!-- HEADER -->
+
+    <div class="top">
+
+        <div>
+
+            <h1>Dashboard</h1>
+
+            <p>
+                Private owner area
+            </p>
+
+        </div>
+
+
+        <button id="logoutButton">
+            Log out
+        </button>
+
+    </div>
+
+
+
+    <!-- ==========================
+         ARTICLES
+    =========================== -->
+
+    <div class="card">
+
+        <h2>Create a new article</h2>
+
+
+        <form id="articleForm">
+
+
+            <label>
+                Title
+            </label>
+
+            <input
+                type="text"
+                id="title"
+                required
+            >
+
+
+            <label>
+                Description
+            </label>
+
+            <textarea
+                id="description"
+                required
+            ></textarea>
+
+
+            <label>
+                Content
+            </label>
+
+            <textarea
+                id="content"
+                rows="10"
+                required
+            ></textarea>
+
+
+            <label>
+                Thumbnail / Image
+            </label>
+
+            <input
+                type="file"
+                id="image_file"
+                accept="image/*"
+            >
+
+            <small class="muted">
+                Choose an image directly from your computer.
+            </small>
+
+
+            <label>
+                External Publication / Journal Link
+            </label>
+
+            <input
+                type="url"
+                id="publication_url"
+                placeholder="https://..."
+            >
+
+
+            <small class="muted">
+                Optional — link to the journal, review, PubMed page,
+                or original publication.
+            </small>
+
+
+            <label>
+
+                <input
+                    type="checkbox"
+                    id="published"
+                >
+
+                Publish immediately
+
+            </label>
+
+
+            <label>
+
+                <input
+                    type="checkbox"
+                    id="featured"
+                >
+
+                Featured article
+
+            </label>
+
+
+            <button type="submit">
+                Create Article
+            </button>
+
+
+        </form>
+
+
+        <p id="message"></p>
+
+    </div>
+
+
+
+    <!-- ARTICLE LIST -->
+
+    <div class="card">
+
+        <h2>My Articles</h2>
+
+        <div id="articlesList">
+            Loading articles...
+        </div>
+
+    </div>
+
+
+
+    <!-- ==========================
+         PROJECTS
+    =========================== -->
+
+    <div class="card">
+
+        <h2>Create a new project</h2>
+
+
+        <form id="projectForm">
+
+
+            <label>
+                Title
+            </label>
+
+            <input
+                type="text"
+                id="projectTitle"
+                required
+            >
+
+
+            <label>
+                Description
+            </label>
+
+            <textarea
+                id="projectDescription"
+                required
+            ></textarea>
+
+
+            <label>
+                Content
+            </label>
+
+            <textarea
+                id="projectContent"
+                rows="10"
+                placeholder="Explain the project, what you built, what you learned, the process, results, etc."
+            ></textarea>
+
+
+            <label>
+                Thumbnail / Image
+            </label>
+
+            <input
+                type="file"
+                id="projectImageFile"
+                accept="image/*"
+            >
+
+            <small class="muted">
+                Choose an image directly from your computer.
+            </small>
+
+
+            <label>
+                Project URL
+            </label>
+
+            <input
+                type="url"
+                id="projectUrl"
+                placeholder="https://..."
+            >
+
+
+            <small class="muted">
+                Optional — link to the live project, website,
+                GitHub repository, demo, or other external page.
+            </small>
+
+
+            <label>
+
+                <input
+                    type="checkbox"
+                    id="projectFeatured"
+                >
+
+                Featured project
+
+            </label>
+
+
+            <button type="submit">
+                Create Project
+            </button>
+
+
+        </form>
+
+
+        <p id="projectMessage"></p>
+
+    </div>
+
+
+
+    <!-- PROJECT LIST -->
+
+    <div class="card">
+
+        <h2>My Projects</h2>
+
+        <div id="projectsList">
+            Loading projects...
+        </div>
+
+    </div>
+
+
+</main>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase.js"></script>
+
+<script src="dashboard.js"></script>
+
+
+</body>
+
+</html>

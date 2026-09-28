@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Project — Haitham</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+
+<body>
+
+    <main class="article-page">
+
+        <div class="article-back">
+            <a href="index.html#projects">
+                ← Back to projects
+            </a>
+        </div>
+
+
+        <div id="projectContainer">
+
+            <div class="article-loading">
+                Loading project...
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="supabase.js"></script>
+
+
+    <script>
+
+        const container =
+            document.getElementById(
+                "projectContainer"
+            );
+
+
+        function escapeHtml(value) {
+
+            return String(value ?? "").replace(
+                /[&<>"']/g,
+                (char) => ({
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#039;"
+                }[char])
+            );
+        }
+
+
+        function escapeAttribute(value) {
+
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/"/g, "&quot;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+        }
+
+
+        function formatDate(date) {
+
+            if (!date) return "";
+
+            return new Date(date)
+                .toLocaleDateString(
+                    "en-US",
+                    {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric"
+                    }
+                );
+        }
+
+
+        function formatContent(content) {
+
+            if (!content) return "";
+
+            return escapeHtml(content)
+                .split(/\n\s*\n/)
+                .map(
+                    paragraph =>
+                        `<p>${paragraph.replace(
+                            /\n/g,
+                            "<br>"
+                        )}</p>`
+                )
+                .join("");
+        }
+
+
+        async function loadProject() {
+
+            const params =
+                new URLSearchParams(
+                    window.location.search
+                );
+
+            const id =
+                params.get("id");
+
+
+            if (!id) {
+
+                container.innerHTML = `
+                    <div class="article-error">
+
+                        <h1>
+                            Project not found
+                        </h1>
+
+                        <p>
+                            No project was specified.
+                        </p>
+
+                        <a href="index.html#projects">
+                            Return to projects →
+                        </a>
+
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            const {
+                data: project,
+                error
+            } = await supabaseClient
+                .from("projects")
+                .select("*")
+                .eq("id", id)
+                .single();
+
+
+            if (error || !project) {
+
+                console.error(
+                    "Could not load project:",
+                    error
+                );
+
+                container.innerHTML = `
+                    <div class="article-error">
+
+                        <h1>
+                            Project not found
+                        </h1>
+
+                        <p>
+                            This project could not be loaded.
+                        </p>
+
+                        <a href="index.html#projects">
+                            Return to projects →
+                        </a>
+
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            const image =
+                project.image_url
+
+                    ? `
+                        <div class="article-cover">
+
+                            <img
+                                src="${escapeAttribute(
+                                    project.image_url
+                                )}"
+                                alt="${escapeAttribute(
+                                    project.title
+                                )}"
+                            >
+
+                        </div>
+                    `
+
+                    : "";
+
+
+            const projectLink =
+                project.project_url
+
+                    ? `
+                        <div class="article-source">
+
+                            <span class="eyebrow">
+                                PROJECT LINK
+                            </span>
+
+                            <p>
+                                Explore the project itself.
+                            </p>
+
+                            <a
+                                href="${escapeAttribute(
+                                    project.project_url
+                                )}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Visit project →
+                            </a>
+
+                        </div>
+                    `
+
+                    : "";
+
+
+            container.innerHTML = `
+
+                <header class="article-header">
+
+                    <span class="eyebrow">
+                        PROJECT
+                    </span>
+
+                    <h1>
+                        ${escapeHtml(
+                            project.title
+                        )}
+                    </h1>
+
+                    <p class="article-description">
+                        ${escapeHtml(
+                            project.description || ""
+                        )}
+                    </p>
+
+                    <div class="article-meta">
+
+                        <span>
+                            ${formatDate(
+                                project.created_at
+                            )}
+                        </span>
+
+                        ${
+                            project.featured
+                                ? `
+                                    <span class="article-featured">
+                                        Featured
+                                    </span>
+                                `
+                                : ""
+                        }
+
+                    </div>
+
+                </header>
+
+
+                ${image}
+
+
+                <article class="article-content">
+
+                    ${formatContent(
+                        project.content || ""
+                    )}
+
+                </article>
+
+
+                ${projectLink}
+
+            `;
+        }
+
+
+        loadProject();
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Haitham — medical, pharmacy, research and learning portfolio.">
+<title>Haitham — Articals, Research & Projects</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="#home"><span>Haitham</span></a>
+  <nav><a href="#home">Home</a><a href="#articles">Articles</a><a href="#projects">Projects</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+  <div class="nav-actions"><button class="icon-btn" id="searchBtn" aria-label="Search">⌕</button><button class="avatar" aria-label="Haitham">H</button></div>
+  <button class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+</header>
+
+<main id="home">
+<section class="hero">
+  <div class="hero-copy"><span class="eyebrow">ARTICALS · RESEARCH · PROJECTS</span><h1>Medical Writer,<br><em>Pharmacy studant.</em><br><em>and a raising searcher</em></h1><p>My personal space for medical knowledge, research, projects, and ideas worth exploring.</p>
+  <div class="search"><span>⌕</span><input id="heroSearch" placeholder="Search articles..."><button id="heroSearchBtn">→</button></div></div>
+  <div class="hero-art"><div class="orb"></div><div class="art-label">LEARN<br><strong>DISCOVER</strong></div></div>
+</section>
+
+<section class="section" id="articles">
+  <div class="section-head"><div><span class="eyebrow">THE LIBRARY</span><h2>Articles</h2></div><span class="section-note" id="articleCount">0 articles</span></div>
+  <div class="toolbar"><span class="muted">New writing, research notes, explanations and discoveries.</span><select id="sort"><option value="newest">Newest</option><option value="title">Title</option><option value="featured">Featured</option></select></div>
+  <div class="article-grid" id="articleGrid"></div>
+</section>
+
+<section class="section projects-section" id="projects">
+  <div class="section-head"><div><span class="eyebrow">WHAT I BUILD & EXPLORE</span><h2>Projects</h2></div></div>
+  <div class="project-grid" id="projectGrid"></div>
+</section>
+
+<section class="split section" id="about"><div><span class="eyebrow">ABOUT</span><h2>Medicine, learning,<br>and the questions between.</h2></div><div><p class="large">A personal space for documenting what I learn, what I research, and the ideas worth sharing.</p><p>Focused on pharmacy, medical science, education, research, and continuous learning — kept simple enough to grow over time.</p></div></section>
+
+<section class="contact" id="contact"><div><span class="eyebrow">LET'S CONNECT</span><h2>Have something worth exploring?</h2></div><a class="light-btn" href="mailto:hello@example.com">Contact me ↗</a></section>
+</main>
+<footer><div class="brand"><span>Haitham</span></div><span>Learn · Discover · Grow</span><span>© 2026</span></footer>
+
+
+<div class="toast" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script src="app.js"></script>
+</body></html>
